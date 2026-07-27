@@ -79,9 +79,3 @@ agente-clinica-dental/
    ```
    streamlit run streamlit_app.py
    ```
-
-## Despliegue
-
-Desplegado en **Hugging Face Spaces** (no requiere tarjeta de crédito para el
-tier gratuito). Pasos de despliegue: *(se documentan en la Fase 5)*.
-
