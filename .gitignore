@@ -1,0 +1,12 @@
+# Entorno y secretos
+.env
+venv/
+__pycache__/
+*.pyc
+
+# Índice vectorial generado (se reconstruye con ingest.py, no hace falta versionarlo)
+data/faiss_index/*
+!data/faiss_index/.gitkeep
+
+# Archivos del sistema
+.DS_Store

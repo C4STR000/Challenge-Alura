@@ -1,0 +1,28 @@
+categoria,servicio,precio_mxn,duracion_estimada_min,notas
+Diagnóstico,Consulta de valoración inicial,450,30,Incluye revisión clínica y plan de tratamiento
+Diagnóstico,Radiografía periapical,250,15,Por pieza dental
+Diagnóstico,Radiografía panorámica,650,20,Estudio completo de ambas arcadas
+Preventivo,Limpieza dental (profilaxis),800,45,Incluye pulido
+Preventivo,Aplicación de flúor,350,15,Recomendado cada 6 meses
+Preventivo,Sellador de fosetas y fisuras,400,20,"Por pieza dental, principalmente en niños"
+Restaurativo,Resina dental (obturación simple),950,40,Por pieza dental
+Restaurativo,Resina dental (obturación compuesta),1400,60,"Por pieza dental, cavidades extensas"
+Restaurativo,Corona de porcelana,7500,90,Incluye impresión y colocación
+Restaurativo,Incrustación cerámica,6200,75,Alternativa conservadora a la corona
+Endodoncia,Endodoncia diente anterior,3200,90,Un conducto
+Endodoncia,Endodoncia premolar,3900,100,Dos conductos en promedio
+Endodoncia,Endodoncia molar,4800,120,Tres o más conductos
+Cirugía,Extracción simple,900,30,Diente erupcionado sin complicación
+Cirugía,Extracción quirúrgica,2500,60,Diente retenido o impactado
+Cirugía,Extracción de terceros molares (por pieza),3800,90,Puede requerir sedación adicional
+Ortodoncia,Valoración ortodóncica,600,30,Incluye radiografía panorámica
+Ortodoncia,Colocación de brackets metálicos,12000,60,Pago único; ajustes mensuales por separado
+Ortodoncia,Colocación de brackets estéticos,16500,60,Pago único; ajustes mensuales por separado
+Ortodoncia,Ajuste mensual de ortodoncia,650,20,Cita de control mensual
+Estética,Blanqueamiento dental en consultorio,3500,60,Sesión única con luz LED
+Estética,Carilla de resina (por pieza),2800,60,Alternativa económica a la carilla de porcelana
+Estética,Carilla de porcelana (por pieza),6500,90,Requiere dos citas
+Prótesis,Prótesis parcial removible,8500,120,Tiempo total incluye pruebas y ajustes
+Prótesis,Prótesis total (por arcada),11000,150,Tiempo total incluye pruebas y ajustes
+Odontopediatría,Consulta pediátrica,500,30,Pacientes de 3 a 12 años
+Odontopediatría,Pulpotomía infantil,1600,50,Diente temporal
