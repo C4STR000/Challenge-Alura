@@ -31,9 +31,9 @@ distintos formatos:
 - **Framework RAG:** LangChain
 - **Embeddings:** `sentence-transformers/all-MiniLM-L6-v2` (local, Hugging Face)
 - **Vector store:** FAISS
-- **LLM:** Google Gemini (`gemini-2.5-flash`)
+- **LLM:** Google Gemini (`gemini-3.5-flash`)
 - **Interfaz:** Streamlit
-- **Despliegue:** Hugging Face Spaces
+- **Despliegue:** Streamlit Community Cloud
 
 ## Estructura del proyecto
 
@@ -73,5 +73,30 @@ agente-clinica-dental/
 
 ## Despliegue
 
-Desplegado en **Hugging Face Spaces** (no requiere tarjeta de crédito para el
-tier gratuito). Pasos de despliegue: *(se documentan en la Fase 5)*.
+Desplegado en **Streamlit Community Cloud** (la plataforma oficial de
+Streamlit; no requiere tarjeta de crédito, solo una cuenta de GitHub).
+
+1. Asegúrate de que tu repositorio esté subido a GitHub, **incluyendo el
+   índice ya construido** (`data/faiss_index/index.faiss` y `index.pkl`),
+   aunque normalmente estén en `.gitignore`:
+   ```
+   git add -f data/faiss_index/index.faiss data/faiss_index/index.pkl
+   git add .
+   git commit -m "Preparar despliegue"
+   git push
+   ```
+2. Ve a [share.streamlit.io](https://share.streamlit.io) e inicia sesión con
+   tu cuenta de GitHub (sin tarjeta).
+3. Clic en **"Create app"** → elige tu repositorio, la rama (`main`) y como
+   *Main file path* escribe: `app/streamlit_app.py`
+4. Antes de desplegar, en **"Advanced settings" → Secrets**, agrega:
+   ```
+   GOOGLE_API_KEY = "tu_api_key_aqui"
+   ```
+5. Clic en **Deploy**. La primera vez tarda unos minutos mientras instala
+   `requirements.txt` y descarga el modelo de embeddings.
+
+> Nota técnica: el índice vectorial (`data/faiss_index/`) va incluido en el
+> repositorio para que la app no tenga que reconstruirlo al iniciar. Si
+> agregas documentos nuevos, usa la función "Agregar documentación" dentro de
+> la propia interfaz — reconstruye el índice automáticamente.
