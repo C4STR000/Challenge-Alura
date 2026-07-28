@@ -132,7 +132,8 @@ crédito, solo una cuenta de GitHub).
 
 ## 🎥 Video de demostración
 
-![Ejemplo de Respuesta](https://github.com/C4STR000/Challenge-Alura/blob/464c8d423e18481a4d928fb5a83a8d93f5492e2d/img/1.mp4)
+[![Ver video](https://img.youtube.com/vi/nzprnvg6r_c/0.jpg)](https://youtu.be/nzprnvg6r_c)
+
 ---
 
 ## Estructura del proyecto
