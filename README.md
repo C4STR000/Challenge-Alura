@@ -128,6 +128,14 @@ crédito, solo una cuenta de GitHub).
 
 ## 6. Ejemplos de respuestas generadas por el agente
 
+| Demostración del Agente (1) | Demostración del Agente (2) |
+| :---: | :---: |
+| ![Preguntas 1](img/1.png) | ![Preguntas 2](img/2.png) |
+
+| Demostración del Agente (3) |
+| :---: |
+| ![Preguntas 3](img/3.png) |
+
 ![Ejemplo de Respuesta](https://raw.githubusercontent.com/C4STR000/Challenge-Alura/refs/heads/main/img/5.png)
 
 ## 🎥 Video de demostración
