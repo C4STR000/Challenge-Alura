@@ -18,6 +18,11 @@ def _sin_indentacion(texto: str) -> str:
     textwrap.dedent no basta aquí porque el ícono SVG insertado (multilínea)
     rompe el cálculo del prefijo común."""
     return "\n".join(linea.lstrip() if linea.strip() else "" for linea in texto.split("\n"))
+
+
+from pathlib import Path
+
+from ingest import construir_indice, CARPETA_DOCUMENTOS
 from rag_chain import cargar_cadena_rag, responder_con_fuentes
 
 st.set_page_config(
@@ -49,6 +54,7 @@ st.markdown(
     }}
 
     #MainMenu, footer {{visibility: hidden;}}
+    [data-testid="stStatusWidget"] {{ display: none !important; }}
     .block-container {{ padding-top: 1rem; max-width: 720px; }}
 
     /* --- Encabezado de marca --- */
@@ -155,6 +161,20 @@ st.markdown(
 )
 
 # ---------------------------------------------------------------------------
+# Carga del agente (una sola vez por sesión del servidor)
+# ---------------------------------------------------------------------------
+@st.cache_resource
+def obtener_cadena():
+    return cargar_cadena_rag()
+
+
+try:
+    cadena, retriever = obtener_cadena()
+except FileNotFoundError as e:
+    st.error(str(e))
+    st.stop()
+
+# ---------------------------------------------------------------------------
 # Sidebar: preguntas rápidas + información de contacto
 # ---------------------------------------------------------------------------
 PREGUNTAS_RAPIDAS = [
@@ -162,6 +182,8 @@ PREGUNTAS_RAPIDAS = [
     "¿Cómo agendo una cita?",
     "¿Qué hacen con mis datos personales?",
     "¿Atienden los sábados?",
+    "¿Qué especialidades ofrecen?",
+    "¿Cuánto tiempo antes debo llegar a mi cita?",
 ]
 
 if "pregunta_pendiente" not in st.session_state:
@@ -178,6 +200,33 @@ with st.sidebar:
             st.session_state.pregunta_pendiente = pregunta_rapida
 
     st.markdown(
+        '<p class="spb-sidebar-title" style="margin-top:22px;">Agregar documentación</p>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p class="spb-sidebar-sub">Sube más archivos (.md, .html, .csv, .pdf) para ampliar '
+        "lo que el asistente puede responder</p>",
+        unsafe_allow_html=True,
+    )
+    archivos_subidos = st.file_uploader(
+        "Subir documentos",
+        type=["md", "html", "csv", "pdf"],
+        accept_multiple_files=True,
+        label_visibility="collapsed",
+    )
+    if archivos_subidos:
+        if st.button("📤 Actualizar base de conocimiento", use_container_width=True):
+            with st.spinner("Procesando documentos y reconstruyendo el índice..."):
+                CARPETA_DOCUMENTOS.mkdir(parents=True, exist_ok=True)
+                for archivo in archivos_subidos:
+                    destino = Path(CARPETA_DOCUMENTOS) / archivo.name
+                    destino.write_bytes(archivo.getvalue())
+                construir_indice()
+            obtener_cadena.clear()
+            st.success("¡Documentos agregados! La base de conocimiento se actualizó.")
+            st.rerun()
+
+    st.markdown(
         textwrap.dedent("""
         <div class="spb-info-card">
             <b>📍 Ubicación</b><br>Av. Insurgentes Sur 1234, Col. Del Valle, CDMX<br><br>
@@ -189,24 +238,28 @@ with st.sidebar:
     )
 
 # ---------------------------------------------------------------------------
-# Carga del agente (una sola vez por sesión del servidor)
-# ---------------------------------------------------------------------------
-@st.cache_resource
-def obtener_cadena():
-    return cargar_cadena_rag()
-
-
-try:
-    cadena, retriever = obtener_cadena()
-except FileNotFoundError as e:
-    st.error(str(e))
-    st.stop()
-
-# ---------------------------------------------------------------------------
 # Historial de conversación
 # ---------------------------------------------------------------------------
 if "historial" not in st.session_state:
-    st.session_state.historial = []
+    st.session_state.historial = [
+        {
+            "rol": "assistant",
+            "contenido": (
+                "¡Hola! Como asistente virtual de Clínica Dental Sonrisa Plena, puedo "
+                "ayudarte respondiendo preguntas basadas en nuestra guía de citas y "
+                "agendamiento. Me puedes preguntar sobre:\n\n"
+                "- Cómo agendar una cita (medios de contacto y ubicación).\n"
+                "- Cómo confirmar o consultar tu cita.\n"
+                "- Nuestros horarios de atención.\n"
+                "- Qué necesitas traer para tu primera cita.\n"
+                "- Nuestra política de tolerancia si llegas tarde.\n"
+                "- Cómo manejamos las urgencias sin cita previa.\n"
+                "- Cómo solicitar un cambio de doctor o especialista.\n\n"
+                "¿En qué te puedo ayudar hoy?"
+            ),
+            "fuentes": ["faq_citas_agendamiento.md"],
+        }
+    ]
 
 AVATAR_ASISTENTE = "🦷"
 AVATAR_USUARIO = "🙂"
