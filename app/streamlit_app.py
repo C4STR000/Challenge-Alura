@@ -121,6 +121,7 @@ st.markdown(
     [data-testid="stSidebar"] {{
         background: #FFFFFF;
         border-right: 1px solid #E3EBEA;
+        min-width: 420px;
     }}
     .spb-sidebar-title {{
         font-family: 'Fraunces', serif;
@@ -179,7 +180,6 @@ except FileNotFoundError as e:
 # ---------------------------------------------------------------------------
 PREGUNTAS_RAPIDAS = [
     "¿Cuánto cuesta una limpieza dental?",
-    "¿Cómo agendo una cita?",
     "¿Qué hacen con mis datos personales?",
     "¿Atienden los sábados?",
     "¿Qué especialidades ofrecen?",
