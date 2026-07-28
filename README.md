@@ -59,23 +59,19 @@ agente-clinica-dental/
    ```
    pip install -r requirements.txt
    ```
-2. Coloca a `.env` tu API key de Google Gemini
+2. Copia `.env.example` a `.env` y coloca tu API key de Google Gemini
    ([consíguela gratis aquí](https://aistudio.google.com/)).
-3. Activa el entorno virtual:
-   * En Windows
-   ```
-   .venv\Scripts\Activate.ps1
-   ```
-   * En Linux\Mac Os
-   ```
-   source .venv/bin/activate
-   ```
-4. Construye el índice vectorial (solo la primera vez, o si cambian los documentos):
+3. Construye el índice vectorial (solo la primera vez, o si cambian los documentos):
    ```
    cd app
    python ingest.py
    ```
-5. Levanta la interfaz:
+4. Levanta la interfaz:
    ```
    streamlit run streamlit_app.py
    ```
+
+## Despliegue
+
+Desplegado en **Hugging Face Spaces** (no requiere tarjeta de crédito para el
+tier gratuito). Pasos de despliegue: *(se documentan en la Fase 5)*.

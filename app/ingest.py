@@ -20,11 +20,14 @@ desde la carpeta app/.
 """
 
 from pathlib import Path
+import os
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
 from loaders import cargar_documentos
 from chunking import dividir_en_chunks
+
+os.environ["HF_HUB_OFFLINE"] = "1"  # el modelo ya está en caché local tras la primera descarga
 
 CARPETA_DOCUMENTOS = Path(__file__).parent.parent / "data" / "documentos"
 CARPETA_INDICE = Path(__file__).parent.parent / "data" / "faiss_index"

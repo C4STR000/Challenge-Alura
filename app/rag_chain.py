@@ -29,6 +29,7 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 os.environ["HF_HUB_OFFLINE"] = "1"
+
 CARPETA_INDICE = Path(__file__).parent.parent / "data" / "faiss_index"
 MODELO_EMBEDDINGS = "sentence-transformers/all-MiniLM-L6-v2"
 MODELO_LLM = "gemini-3.5-flash"
