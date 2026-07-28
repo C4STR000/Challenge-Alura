@@ -5,7 +5,7 @@ preguntas de pacientes basándose **únicamente** en la documentación oficial
 de una clínica dental ficticia. Proyecto desarrollado para el Challenge
 Alura — Agentes de IA Corporativos.
 
-**🔗 App en vivo:** `https://challenge-alura-bgi2qqgtsnvtnujyew3yrr.streamlit.app/`
+**🔗 App en vivo:** (https://challenge-alura-bgi2qqgtsnvtnujyew3yrr.streamlit.app)
 
 ---
 
@@ -128,11 +128,11 @@ crédito, solo una cuenta de GitHub).
 
 ## 6. Ejemplos de respuestas generadas por el agente
 
-`https://github.com/C4STR000/Challenge-Alura/blob/main/img/5.png`
+(https://raw.githubusercontent.com/C4STR000/Challenge-Alura/refs/heads/main/img/5.png)
 
 ## 🎥 Video de demostración
 
-`https://github.com/C4STR000/Challenge-Alura/blob/main/img/1.mp4`
+(https://raw.githubusercontent.com/C4STR000/Challenge-Alura/refs/heads/main/img/1.mp4)
 
 ---
 
