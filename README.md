@@ -132,7 +132,7 @@ crédito, solo una cuenta de GitHub).
 
 ## 🎥 Video de demostración
 
-[![Ver video](https://github.com/user-attachments/assets/29ca5c3d-f358-4c53-8b4c-00d10232face)
+<video src='https://github.com/user-attachments/assets/29ca5c3d-f358-4c53-8b4c-00d10232face' width='100%' controls></video>
 
 ---
 
