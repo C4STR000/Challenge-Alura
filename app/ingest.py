@@ -26,8 +26,7 @@ from langchain_community.vectorstores import FAISS
 
 from loaders import cargar_documentos
 from chunking import dividir_en_chunks
-
-os.environ["HF_HUB_OFFLINE"] = "1"  # el modelo ya está en caché local tras la primera descarga
+from rag_chain import _forzar_offline_si_ya_esta_en_cache
 
 CARPETA_DOCUMENTOS = Path(__file__).parent.parent / "data" / "documentos"
 CARPETA_INDICE = Path(__file__).parent.parent / "data" / "faiss_index"
@@ -35,6 +34,8 @@ CARPETA_INDICE = Path(__file__).parent.parent / "data" / "faiss_index"
 # Modelo de embeddings local. "MiniLM" es pequeño y rápido — suficiente para
 # un corpus chico como el nuestro (4 documentos), y no requiere API key.
 MODELO_EMBEDDINGS = "sentence-transformers/all-MiniLM-L6-v2"
+
+_forzar_offline_si_ya_esta_en_cache(MODELO_EMBEDDINGS)
 
 
 def construir_indice():

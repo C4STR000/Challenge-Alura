@@ -28,11 +28,32 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
-os.environ["HF_HUB_OFFLINE"] = "1"
 
 CARPETA_INDICE = Path(__file__).parent.parent / "data" / "faiss_index"
 MODELO_EMBEDDINGS = "sentence-transformers/all-MiniLM-L6-v2"
 MODELO_LLM = "gemini-3.5-flash"
+
+
+def _forzar_offline_si_ya_esta_en_cache(modelo: str) -> None:
+    """Si el modelo de embeddings ya se descargó antes (está en la caché
+    local de Hugging Face), forzamos modo offline para evitar un bug
+    conocido de huggingface_hub con su cliente httpx. Pero si es la
+    PRIMERA vez que corre (por ejemplo, recién desplegado en Hugging Face
+    Spaces, contenedor nuevo sin caché), NO forzamos offline, porque
+    entonces sí necesita poder descargar el modelo por internet."""
+    try:
+        from huggingface_hub import scan_cache_dir
+
+        cache_info = scan_cache_dir()
+        ya_esta_cacheado = any(repo.repo_id == modelo for repo in cache_info.repos)
+    except Exception:
+        ya_esta_cacheado = False
+
+    if ya_esta_cacheado:
+        os.environ["HF_HUB_OFFLINE"] = "1"
+
+
+_forzar_offline_si_ya_esta_en_cache(MODELO_EMBEDDINGS)
 K_FRAGMENTOS = 4  # cuántos fragmentos recuperar por pregunta
 
 PROMPT_SISTEMA = """Eres el asistente virtual de Clínica Dental Sonrisa Plena.
